@@ -16,6 +16,13 @@ public class Country {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "code_2")
+    private String alternativeCode;
+
+    @Column(name = "name")
+    private String name;
+
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "continent")
     private Continent continent;
@@ -50,7 +57,7 @@ public class Country {
     @Column(name = "head_of_state")
     private String headOfState;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "capital")
     private City city;
 
@@ -179,5 +186,21 @@ public class Country {
 
     public void setLanguages(Set<CountryLanguage> languages) {
         this.languages = languages;
+    }
+
+    public String getAlternativeCode() {
+        return alternativeCode;
+    }
+
+    public void setAlternativeCode(String alternativeCode) {
+        this.alternativeCode = alternativeCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
