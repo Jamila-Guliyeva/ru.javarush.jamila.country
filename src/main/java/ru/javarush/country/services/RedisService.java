@@ -15,7 +15,6 @@ public class RedisService {
     private RedisClient redisClient;
     private ObjectMapper objectMapper;
 
-    private DBService dbService;
 
     public RedisClient prepareRedisClient() {
         this.redisClient = RedisClient.create(RedisURI.create("localhost", 6379));
