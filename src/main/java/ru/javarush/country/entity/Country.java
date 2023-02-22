@@ -14,6 +14,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -213,5 +214,36 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Country country = (Country) o;
+        return Objects.equals(code, country.code)
+                && Objects.equals(alternativeCode, country.alternativeCode)
+                && Objects.equals(name, country.name)
+                && continent == country.continent
+                && Objects.equals(region, country.region)
+                && Objects.equals(surfaceArea, country.surfaceArea)
+                && Objects.equals(independenceYear, country.independenceYear)
+                && Objects.equals(population, country.population)
+                && Objects.equals(lifeExpectancy, country.lifeExpectancy)
+                && Objects.equals(gnp, country.gnp)
+                && Objects.equals(gnpoId, country.gnpoId)
+                && Objects.equals(localName, country.localName)
+                && Objects.equals(governmentForm, country.governmentForm)
+                && Objects.equals(headOfState, country.headOfState)
+                && Objects.equals(city, country.city)
+                && Objects.equals(languages, country.languages);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, alternativeCode,
+                name, continent, region, surfaceArea,
+                independenceYear, population, lifeExpectancy,
+                gnp, gnpoId, localName, governmentForm, headOfState);
     }
 }

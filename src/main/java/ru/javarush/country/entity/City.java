@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "city")
 public class City {
@@ -71,5 +73,20 @@ public class City {
 
     public void setPopulation(Integer population) {
         this.population = population;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        City city = (City) o;
+        return Objects.equals(name, city.name)
+                && Objects.equals(country, city.country)
+                && Objects.equals(district, city.district);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, district, population);
     }
 }
