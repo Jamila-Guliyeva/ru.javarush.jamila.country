@@ -2,3 +2,5 @@
 *.log
 *.class
 *.iml
+/out/
+target

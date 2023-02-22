@@ -1,4 +1,4 @@
-package ru.javarush.country.services;
+package ru.javarush.country.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.lettuce.core.RedisClient;
@@ -8,23 +8,21 @@ import ru.javarush.country.dao.CountryDao;
 
 import static java.util.Objects.nonNull;
 
-
-
-public class DBService {
+public class DBMapper {
 
     private final SessionFactory sessionFactory;
     private final RedisClient redisClient;
     private final ObjectMapper objectMapper;
     private final CityDao cityDao;
     private final CountryDao countryDao;
-    private final RedisService redisService;
-    private final RelationalDBService relationalDBService;
+    private final RedisMapper redisMapper;
+    private final RelationalDBMapper relationalDBMapper;
 
-    public DBService() {
-        relationalDBService = new RelationalDBService();
-        sessionFactory = relationalDBService.prepareRelationalDb();
-        redisService = new RedisService();
-        redisClient = redisService.prepareRedisClient();
+    public DBMapper() {
+        relationalDBMapper = new RelationalDBMapper();
+        sessionFactory = relationalDBMapper.prepareRelationalDb();
+        redisMapper = new RedisMapper();
+        redisClient = redisMapper.prepareRedisClient();
         objectMapper = new ObjectMapper();
         cityDao = new CityDao(sessionFactory);
         countryDao = new CountryDao(sessionFactory);
@@ -59,11 +57,11 @@ public class DBService {
         return countryDao;
     }
 
-    public RedisService getRedisService() {
-        return redisService;
+    public RedisMapper getRedisService() {
+        return redisMapper;
     }
 
-    public RelationalDBService getRelationalDBService() {
-        return relationalDBService;
+    public RelationalDBMapper getRelationalDBService() {
+        return relationalDBMapper;
     }
 }

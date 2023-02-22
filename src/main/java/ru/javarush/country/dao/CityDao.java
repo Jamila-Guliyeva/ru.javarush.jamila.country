@@ -1,10 +1,8 @@
 package ru.javarush.country.dao;
 
-
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import ru.javarush.country.entity.City;
-
 
 import java.util.List;
 

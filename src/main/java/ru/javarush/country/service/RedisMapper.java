@@ -1,4 +1,4 @@
-package ru.javarush.country.services;
+package ru.javarush.country.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,11 +10,11 @@ import ru.javarush.country.redis.CityCountry;
 
 import java.util.List;
 
-public class RedisService {
+public class RedisMapper {
 
     private RedisClient redisClient;
-    private ObjectMapper objectMapper;
 
+    private ObjectMapper objectMapper;
 
     public RedisClient prepareRedisClient() {
         this.redisClient = RedisClient.create(RedisURI.create("localhost", 6379));
@@ -32,9 +32,9 @@ public class RedisService {
         this.redisClient = redisClient;
     }
 
-    public void testRedisData(List<Integer> ids, DBService dbService){
-        this.redisClient = dbService.getRedisClient();
-        this.objectMapper = dbService.getObjectMapper();
+    public void testRedisData(List<Integer> ids, DBMapper dbMapper){
+        this.redisClient = dbMapper.getRedisClient();
+        this.objectMapper = dbMapper.getObjectMapper();
         try(StatefulRedisConnection<String, String> connection = this.redisClient.connect()){
             RedisStringCommands<String, String> sync = connection.sync();
             for(Integer id : ids){
